@@ -19,12 +19,12 @@ import java.util.concurrent.Executor;
 /**
  * 测试邮件发送服务
  * <p>
- * 注意LitemallNotifyService采用异步线程操作
+ * 注意Litemall NotifyService采用异步线程操作
  * 因此测试的时候需要睡眠一会儿，保证任务执行
  * <p>
  * 开发者需要确保：
- * 1. 在相应的邮件服务器设置正确notify.properties已经设置正确
- * 2. 在相应的邮件服务器设置正确
+ * 1. 在notify.properties已经设置正确的邮件服务器信息
+ * 2. 在相应的邮箱中设置正确邮件服务器，如开启pop3/smtp服务
  */
 @WebAppConfiguration
 @RunWith(SpringRunner.class)
@@ -36,7 +36,7 @@ public class MailTest {
 
     @Test
     public void testMail() {
-        notifyService.notifyMail("订单信息", "订单1111111已付款，请发货");
+        notifyService.notifyMail("litemall邮件测试", "订单1111111已付款，请发货");
     }
 
     @Configuration
