@@ -9,6 +9,7 @@ import com.github.binarywang.wxpay.bean.result.BaseWxPayResult;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -665,6 +666,7 @@ public class WxOrderService {
      */
     @Transactional
     public Object payNotify(HttpServletRequest request, HttpServletResponse response) {
+        logger.info("pay notify service start");
         String xmlResult = null;
         try {
             xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
@@ -685,6 +687,7 @@ public class WxOrderService {
                 logger.error(xmlResult);
                 throw new WxPayException("微信通知支付失败！");
             }
+            logger.info("微信通知支付成功！");
         } catch (WxPayException e) {
             e.printStackTrace();
             return WxPayNotifyResponse.fail(e.getMessage());
@@ -768,6 +771,7 @@ public class WxOrderService {
         // 取消订单超时未支付任务
         taskService.removeTask(new OrderUnpaidTask(order.getId()));
 
+        logger.info("pay notify service start");
         return WxPayNotifyResponse.success("处理成功!");
     }
 

@@ -55,4 +55,5 @@
     <logger name="org.linlinjava.litemall.admin" level="debug" />
     <logger name="org.linlinjava.litemall.wx" level="debug" />
     <logger name="org.linlinjava.litemall" level="debug" />
+    <logger name="com.github.binarywang.wxpay" level="debug" />
 </configuration>
