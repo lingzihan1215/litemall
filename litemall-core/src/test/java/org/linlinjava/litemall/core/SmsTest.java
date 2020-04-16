@@ -38,7 +38,7 @@ public class SmsTest {
 
     @Test
     public void testCaptcha() {
-        String phone = "xxxxxxxxxxx";
+        String phone = "18511870260";
         String[] params = new String[]{"123456"};
 
         notifyService.notifySmsTemplate(phone, NotifyType.CAPTCHA, params);
