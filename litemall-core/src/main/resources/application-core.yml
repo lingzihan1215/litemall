@@ -7,7 +7,7 @@ litemall:
     # 微信支付配置
     mch-id: 1586699681
     mch-key: yy10301215yyfyy10301215yyf123456
-    notify-url: http://litemallzz.free.idcfengye.com/wx/order/pay-notify
+    notify-url: http://litemallzz.gz2vip.idcfengye.com/wx/order/pay-notify
     # 商户证书文件路径
     # 请参考“商户证书”一节 https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3
     key-path: xxxxx
