@@ -27,7 +27,7 @@
     "pages/groupon/grouponList/grouponList"
   ],
   "window": {
-    "navigationBarTitleText": "Renard",
+    "navigationBarTitleText": "邻里食铺",
     "enablePullDownRefresh": true,
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
