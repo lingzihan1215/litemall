@@ -4,6 +4,7 @@ import com.github.binarywang.wxpay.bean.request.WxPayRefundRequest;
 import com.github.binarywang.wxpay.bean.result.WxPayRefundResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.notify.NotifyService;
@@ -30,7 +31,7 @@ import java.util.Map;
 import static org.linlinjava.litemall.admin.util.AdminResponseCode.*;
 
 @Service
-
+@Slf4j
 public class AdminOrderService {
     private final Log logger = LogFactory.getLog(AdminOrderService.class);
 
@@ -88,6 +89,8 @@ public class AdminOrderService {
      */
     @Transactional
     public Object refund(String body) {
+        log.debug("order refund,body:{}", body);
+
         Integer orderId = JacksonUtil.parseInteger(body, "orderId");
         String refundMoney = JacksonUtil.parseString(body, "refundMoney");
         if (orderId == null) {
@@ -234,7 +237,7 @@ public class AdminOrderService {
         // 如果订单不是关闭状态(已取消、系统取消、已退款、用户已确认、系统已确认)，则不能删除
         Short status = order.getOrderStatus();
         if (!status.equals(OrderUtil.STATUS_CANCEL) && !status.equals(OrderUtil.STATUS_AUTO_CANCEL) &&
-                !status.equals(OrderUtil.STATUS_CONFIRM) &&!status.equals(OrderUtil.STATUS_AUTO_CONFIRM) &&
+                !status.equals(OrderUtil.STATUS_CONFIRM) && !status.equals(OrderUtil.STATUS_AUTO_CONFIRM) &&
                 !status.equals(OrderUtil.STATUS_REFUND_CONFIRM)) {
             return ResponseUtil.fail(ORDER_DELETE_FAILED, "订单不能删除");
         }
@@ -261,7 +264,7 @@ public class AdminOrderService {
         }
         // 目前只支持回复一次
         LitemallComment comment = commentService.findById(commentId);
-        if(comment == null){
+        if (comment == null) {
             return ResponseUtil.badArgument();
         }
         if (!StringUtils.isEmpty(comment.getAdminContent())) {

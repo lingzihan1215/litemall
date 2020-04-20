@@ -10,7 +10,8 @@ litemall:
     notify-url: http://litemallzz.gz2vip.idcfengye.com/wx/order/pay-notify
     # 商户证书文件路径
     # 请参考“商户证书”一节 https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3
-    key-path: xxxxx
+    key-path: F:\shop\litemall-mine\WXCertUtil\cert\apiclient_cert.p12
+#    key-path: /data/mall/wx/cert/apiclient_cert.p12
 
   #通知相关配置
   notify:
