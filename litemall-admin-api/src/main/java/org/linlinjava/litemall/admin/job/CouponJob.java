@@ -1,7 +1,6 @@
 package org.linlinjava.litemall.admin.job;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.linlinjava.litemall.db.domain.LitemallCoupon;
 import org.linlinjava.litemall.db.domain.LitemallCouponUser;
 import org.linlinjava.litemall.db.service.LitemallCouponService;
@@ -18,8 +17,8 @@ import java.util.List;
  * 检测优惠券过期情况
  */
 @Component
+@Slf4j
 public class CouponJob {
-    private final Log logger = LogFactory.getLog(CouponJob.class);
 
     @Autowired
     private LitemallCouponService couponService;
@@ -33,21 +32,23 @@ public class CouponJob {
      */
     @Scheduled(fixedDelay = 60 * 60 * 1000)
     public void checkCouponExpired() {
-        logger.info("系统开启任务检查优惠券是否已经过期");
+        log.info("系统开启任务检查系统优惠券和用户优惠券是否已经过期");
 
+        //查找已经过期的优惠券
         List<LitemallCoupon> couponList = couponService.queryExpired();
         for (LitemallCoupon coupon : couponList) {
             coupon.setStatus(CouponConstant.STATUS_EXPIRED);
             couponService.updateById(coupon);
         }
 
+        //查找用户已经过期的优惠券
         List<LitemallCouponUser> couponUserList = couponUserService.queryExpired();
         for (LitemallCouponUser couponUser : couponUserList) {
             couponUser.setStatus(CouponUserConstant.STATUS_EXPIRED);
             couponUserService.update(couponUser);
         }
 
-        logger.info("系统结束任务检查优惠券是否已经过期");
+        log.info("系统结束任务检查系统优惠券和用户优惠券是否已经过期");
     }
 
 }
