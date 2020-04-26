@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.wx.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.validator.Order;
@@ -17,8 +18,8 @@ import javax.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/wx/order")
 @Validated
+@Slf4j
 public class WxOrderController {
-    private final Log logger = LogFactory.getLog(WxOrderController.class);
 
     @Autowired
     private WxOrderService wxOrderService;
